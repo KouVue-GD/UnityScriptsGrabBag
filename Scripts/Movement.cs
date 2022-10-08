@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    public bool is3D = true;
     #region 3D
     public Rigidbody rb;
     void Start(){
-        if(rb == null){
+        if(rb == null && is3D == true){
             rb = GetComponent<Rigidbody>();    
+        }
+
+        if(rb2d == null && is3D == false){
+            rb2d = GetComponent<Rigidbody2D>();    
         }
     }
 
@@ -40,15 +45,33 @@ public class Movement : MonoBehaviour
 
     //direct input
     public void ZMovement(float input, float speed){
-        rb.AddForce(transform.forward * input * speed);
+        if(rb != null){
+            rb.AddForce(transform.forward * input * speed);
+        }
+
+        if(rb2d != null){
+            rb2d.AddForce(transform.forward * input * speed);
+        }
     }
 
     public void XMovement(float input, float speed){
-        rb.AddForce(transform.right * input * speed);
+        if(rb != null){
+            rb.AddForce(transform.right * input * speed);
+        }
+
+        if(rb2d != null){
+            rb2d.AddForce(transform.right * input * speed);
+        }
     }
 
     public void YMovement(float input, float speed){
-        rb.AddForce(transform.up * input * speed);
+        if(rb != null){
+            rb.AddForce(transform.up * input * speed);
+        }
+        
+        if(rb2d != null){
+            rb2d.AddForce(transform.up * input * speed);
+        }
     }
 
     //Jump
@@ -62,7 +85,7 @@ public class Movement : MonoBehaviour
     #endregion
 
     #region 2D
-        Rigidbody2D rb2d;
+        public Rigidbody2D rb2d;
 
         public void MoveLeft2D(float speed){
                 rb2d.AddForce(Vector2.left * speed * Time.deltaTime);
@@ -97,11 +120,25 @@ public class Movement : MonoBehaviour
             }
 
             //TOPDOWN
+            /// <summary>
+            /// Used for Topdown
+            /// </summary>
+            /// <param name="input"></param>
+            /// <param name="speed"></param>
             public void Move2D(Vector2 input, float speed){
                 rb2d.AddForce(input * speed);
             }
+
+            public void Move2DVelocity(Vector2 input, float speed){
+                rb2d.velocity = (input * speed);
+            }
             
             //SIDESCROLLER
+            /// <summary>
+            /// Used for Sidescrollers
+            /// </summary>
+            /// <param name="input"></param>
+            /// <param name="speed"></param>
             public void Move2D(float input, float speed){
                 rb2d.AddForce(new Vector2(input * speed, 0));
             }

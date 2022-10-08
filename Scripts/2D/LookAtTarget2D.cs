@@ -11,10 +11,10 @@ public class LookAtTarget2D : MonoBehaviour
     public Vector3 offset;
     public Transform target;
     void LookAtTarget(Transform target){
-        Vector3 dir = target.position - Camera.main.WorldToScreenPoint(transform.position);
+        Vector3 dir = target.position - gameObject.transform.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        target.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        target.eulerAngles += offset;
+        gameObject.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        gameObject.transform.eulerAngles += offset;
     }
 
     void Update()

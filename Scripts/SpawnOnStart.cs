@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class SpawnOnDestroy : MonoBehaviour
+public class SpawnOnStart : MonoBehaviour
 {
     [Serializable]
     public class ObjectToSpawn{
@@ -15,7 +15,9 @@ public class SpawnOnDestroy : MonoBehaviour
         [Range(0f, 100f), Tooltip("By Percent ie 50 = 50% chance to drop")]
         public float dropRate;
     }
-
+    float timer = 0;
+    bool hasPlayed = false;
+    public float delayBySeconds = 0;
     [Tooltip("Spawn using its own transform, overrides other options")]
     public bool spawnUsingDefaultTransform;
     [Tooltip("Spawn using its own rotation")]
@@ -31,14 +33,12 @@ public class SpawnOnDestroy : MonoBehaviour
     */
 
     public List<ObjectToSpawn> listOfObjectsToSpawn;
+    void Update() {
+        if(hasPlayed == false){
+            timer += Time.deltaTime;
+        }
 
-    bool isQuitting = false;
-    //This is to prevent left over objects during testing
-    void OnApplicationQuit(){isQuitting = true;}
-
-    void OnDestroy() {
-        if (!isQuitting)
-        {
+        if(timer >= delayBySeconds && hasPlayed == false){
             foreach (var item in listOfObjectsToSpawn)
             {
                 if(item.objectToSpawn != null){
@@ -72,6 +72,8 @@ public class SpawnOnDestroy : MonoBehaviour
                     }
                 }
             }
+
+            hasPlayed = true;
         }
     }
 }

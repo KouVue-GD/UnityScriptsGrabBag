@@ -59,4 +59,32 @@ public class SyncPosition : MonoBehaviour
             }
         }
     }
+
+    public float shakeAmount = 0.1f;
+    public float shakeDuration = 0.1f;
+
+    public void Shake()
+    {
+        InvokeRepeating("StartShake", 0, 0.01f);
+        Invoke("StopShake", shakeDuration);
+    }
+
+    public void StartShake(){
+        if(shakeAmount > 0)
+        {
+            float shakeX = Random.value * shakeAmount * 2 - shakeAmount;
+            float shakeY = Random.value * shakeAmount * 2 - shakeAmount;
+            Vector3 shakePos = new Vector3(shakeX, shakeY, 0);
+            if(target != null){
+                transform.position = shakePos + target.position + startingPos;
+            }
+        }
+    }
+
+    void StopShake(){
+        CancelInvoke("StartShake");
+        if(target != null){
+            transform.position = target.position + startingPos;
+        }
+    }
 }

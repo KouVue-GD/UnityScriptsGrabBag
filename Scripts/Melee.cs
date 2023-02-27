@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class Melee : MonoBehaviour
 {
-    [SerializeField]
-    List<string> validTargetTags;
-    [SerializeField]
-    float damage;
-    [SerializeField]
-    float force;
-    [SerializeField]
-    Animator anim;
-    [SerializeField]
-    float nextAttackDelay;
+    [SerializeField] List<string> validTargetTags;
+    [SerializeField] float damage;
+    [SerializeField] float force;
+    [SerializeField] Animator anim;
+    [SerializeField] float nextAttackDelay;
     int index = 0;
     float timeBetweenAttacks = 0;
     float timer;
@@ -21,8 +16,7 @@ public class Melee : MonoBehaviour
     bool canHit;
 
 
-    [SerializeField]
-    List<AnimationClip> animationMelee;
+    [SerializeField] List<AnimationClip> animationMelee;
 
     void Start(){
         timeBetweenAttacks = anim.GetCurrentAnimatorStateInfo(0).length;

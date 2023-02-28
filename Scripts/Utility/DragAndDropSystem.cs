@@ -4,23 +4,18 @@ using UnityEngine;
 
 public class DragAndDropSystem : MonoBehaviour
 {
-    [SerializeField]
-    Camera cam;
+    [SerializeField]Camera cam;
 
-    [SerializeField]
-    float distanceToCheck = 20f;
+    [SerializeField]float distanceToCheck = 20f;
     GameObject objectToDrag;
     Vector3 offset;
 
     Vector3 mousePos;
 
-    [SerializeField]
-    bool is3D;
-    [SerializeField]
-    bool is2D;
+    [SerializeField]bool is3D;
+    [SerializeField]bool is2D;
 
-    [SerializeField]
-    List<string> draggableTags;
+    [SerializeField]List<string> draggableTags;
 
      void StartDrag() {
         //check if it is using gui or 2d or 3d

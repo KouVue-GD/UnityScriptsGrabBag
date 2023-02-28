@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Melee : MonoBehaviour
+public class MeleeModule : MonoBehaviour
 {
     [SerializeField] List<string> validTargetTags;
     [SerializeField] float damage;
@@ -19,7 +19,9 @@ public class Melee : MonoBehaviour
     [SerializeField] List<AnimationClip> animationMelee;
 
     void Start(){
-        timeBetweenAttacks = anim.GetCurrentAnimatorStateInfo(0).length;
+        if(anim != null){
+            timeBetweenAttacks = anim.GetCurrentAnimatorStateInfo(0).length;
+        }
     }
 
     // Update is called once per frame
@@ -43,7 +45,7 @@ public class Melee : MonoBehaviour
         timer += Time.deltaTime;
     }
 
-    public void StartMelee(){
+    public void Melee(){
 
         //if the next attack has started
         if(canAttack == true){
@@ -84,7 +86,7 @@ public class Melee : MonoBehaviour
             foreach (var item in validTargetTags)
             {
                 if(coll.transform.CompareTag(item)){
-                    coll.transform.GetComponent<Health>().Damage(damage);
+                    coll.transform.GetComponent<LifeModule>().Damage(damage);
                     coll.transform.GetComponent<Rigidbody>().AddForce((gameObject.transform.position - coll.ClosestPoint(gameObject.transform.position)).normalized * force);
                 }
 

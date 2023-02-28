@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    public void SwitchActiveState(GameObject objectToSwitch){
-        objectToSwitch.SetActive(!objectToSwitch.activeSelf);
+    // public GameObject target;
+
+    public void ToggleActive(GameObject target){
+        target.SetActive(!target.activeSelf);
     }
 }

@@ -10,14 +10,24 @@ public class DamageOnCollision : MonoBehaviour
     public List<string> invalidTargetTags;
 
     void OnCollisionEnter(Collision coll) {
-        if(coll.transform.GetComponent<Health>() != null){
+        if(coll.transform.GetComponent<LifeModule>() != null){
             foreach (var item in invalidTargetTags)
             {
                 if(coll.transform.CompareTag(item) != true){
-                    coll.transform.GetComponent<Health>().Damage(damage);
+                    coll.transform.GetComponent<LifeModule>().Damage(damage);
                 }
             }
-            
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D coll) {
+        if(coll.transform.GetComponent<LifeModule>() != null){
+            foreach (var item in invalidTargetTags)
+            {
+                if(coll.transform.CompareTag(item) != true){
+                    coll.transform.GetComponent<LifeModule>().Damage(damage);
+                }
+            }
         }
     }
 

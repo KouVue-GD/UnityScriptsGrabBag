@@ -63,7 +63,7 @@ public class LifeModule : MonoBehaviour
                 }
             }
 
-            if(deathType == DeathType.DestroyOnDeath){
+            if(deathType == DeathType.DisableSelfOnDeath){
                 if(currHealth <= minHealth){
                     DisableSelfOnDeath();
                 }

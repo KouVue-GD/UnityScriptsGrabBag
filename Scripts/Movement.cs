@@ -276,6 +276,7 @@ public class Movement : MonoBehaviour
         }
         //TODO: okay so raycast checks the right spot for grabbing the ledge fix it so it works
         //wall check, can ledge grab from block if one block empty above that block
+        
         if(canLedgeGrab == true && Physics2D.Raycast(gameObject.transform.position, gameObject.transform.right, characterWidth, ledgeMask).collider != null){
             
             Debug.DrawLine(gameObject.transform.position + new Vector3(characterWidth, characterHeight, 0), gameObject.transform.position + new Vector3(characterWidth, characterHeight, 0) + -gameObject.transform.up * characterHeight, Color.red);
